@@ -1,7 +1,7 @@
 name: Build APK
 on:
   push:
-    branches: [ main, master ]
+    branches: [main, master]
   workflow_dispatch:
 
 jobs:
@@ -16,3 +16,4 @@ jobs:
         with:
           buildozer_version: master
           command: buildozer android debug
+          

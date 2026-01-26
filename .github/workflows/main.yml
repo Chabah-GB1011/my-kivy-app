@@ -1,15 +1,17 @@
 name: Build APK
-on: [push, pull_request]
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch: # هذا السطر يسمح لك بتشغيله يدوياً
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Build with Buildozer
-        uses: kivy/buildozer-action@master
+        uses: ArtemSerebrennikov/buildozer-action@v1
         with:
-          buildozer_version: stable
+          buildozer_version: master
           command: buildozer android debug
-          

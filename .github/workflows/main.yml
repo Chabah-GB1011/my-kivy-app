@@ -1,31 +1,37 @@
-name: Build APK
-on: [push, pull_request]
+name: Build Android APK
+on: 
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
-      - name: Get Date
-        shell: bash
-        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
-        id: get-date
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python_version: '3.11'
 
-      - name: Buildozer Color Fix
+      - name: Install Dependencies
         run: |
-          # إصلاح مشكلة الألوان في بيئة GitHub
-          sed -i 's/#log_level = 2/log_level = 2/g' buildozer.spec
+          sudo apt update
+          sudo apt install -y python3-pip build-essential git python3-dev ffmpeg libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libportmidi-dev libswscale-dev libavformat-dev libavcodec-dev zlib1g-dev libgstreamer1.0-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-libav gstreamer1.0-doc gstreamer1.0-tools gstreamer1.0-x gstreamer1.0-alsa gstreamer1.0-gl gstreamer1.0-gtk3 gstreamer1.0-qt5 gstreamer1.0-pulseaudio
 
       - name: Build with Buildozer
+        # تم تصحيح الكلمة هنا من bulldozer إلى buildozer
         uses: kivy/buildozer-action@master
         with:
           buildozer_version: master
           python_version: 3.11
 
-      - name: Upload APK
-        uses: actions/upload-artifact@v2
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v3
         with:
-          name: package-${{ steps.get-date.outputs.date }}
+          name: my-awesome-app
           path: bin/*.apk

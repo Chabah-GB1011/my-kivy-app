@@ -1,18 +1,31 @@
 name: Build APK
-on:
-  push:
-    branches: [ main, master ]
-  workflow_dispatch:
+on: [push, pull_request]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v2
+
+      - name: Get Date
+        shell: bash
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+        id: get-date
+
+      - name: Buildozer Color Fix
+        run: |
+          # إصلاح مشكلة الألوان في بيئة GitHub
+          sed -i 's/#log_level = 2/log_level = 2/g' buildozer.spec
 
       - name: Build with Buildozer
         uses: kivy/buildozer-action@master
         with:
-          buildozer_version: stable
-          command: buildozer android debug
+          buildozer_version: master
+          python_version: 3.11
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v2
+        with:
+          name: package-${{ steps.get-date.outputs.date }}
+          path: bin/*.apk

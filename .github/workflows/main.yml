@@ -1,4 +1,4 @@
-name: Build Android APK
+mname: Build Android APK
 on: 
   push:
     branches: [ main, master ]
@@ -25,7 +25,7 @@ jobs:
 
       - name: Build with Buildozer
         # تم تصحيح الكلمة هنا من bulldozer إلى buildozer (حرف L واحد)
-        uses: kivy/bulldozer-action@master
+        uses: kivy/buildozer-action@master
         with:
           buildozer_version: master
           python_version: 3.11

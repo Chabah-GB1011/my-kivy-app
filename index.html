@@ -2,25 +2,75 @@
 <html dir="rtl" lang="ar">
 <head>
     <meta charset="UTF-8">
-    <title>محمد | مبرمج وفني متعدد المهارات</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Makeen Empire | إمبراطورية الأتمتة</title>
     <style>
-        body { font-family: sans-serif; background: #1a1a1a; color: white; text-align: center; padding: 50px; }
-        .card { background: #2d2d2d; padding: 30px; border-radius: 15px; border-left: 8px solid #00ff00; display: inline-block; max-width: 500px; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
-        h1 { color: #00ff00; margin-bottom: 10px; }
-        .skills { font-weight: bold; color: #ffcc00; font-size: 1.1em; }
-        hr { border: 0; border-top: 1px solid #444; margin: 20px 0; }
-        .btn { display: inline-block; background: #00ff00; color: black; padding: 12px 25px; text-decoration: none; border-radius: 5px; margin-top: 20px; font-weight: bold; }
-        p { line-height: 1.6; }
+        body { 
+            background: radial-gradient(circle, #1a1a1a 0%, #000 100%);
+            background-image: url('https://www.transparenttextures.com/patterns/stardust.png'); 
+            color: #d4af37; font-family: 'Arial', sans-serif;
+            margin: 0; padding: 0; text-align: center;
+        }
+        .glow { text-shadow: 0 0 15px rgba(212, 175, 55, 0.6); }
+        .container { max-width: 800px; margin: auto; padding: 20px; }
+        .card { 
+            background: rgba(255, 255, 255, 0.03); border: 1px solid #d4af37; 
+            border-radius: 15px; padding: 25px; margin: 20px 0;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.1); backdrop-filter: blur(5px);
+        }
+        .btn-gold { 
+            background: linear-gradient(45deg, #d4af37, #f9f295); 
+            color: #000; padding: 12px 30px; border-radius: 8px; 
+            text-decoration: none; font-weight: bold; display: inline-block; 
+            border: none; cursor: pointer; transition: 0.3s;
+        }
+        .btn-gold:hover { transform: scale(1.05); box-shadow: 0 0 20px #d4af37; }
+        input { 
+            width: 80%; background: #111; border: 1px solid #d4af37; 
+            color: #fff; padding: 10px; margin: 10px 0; border-radius: 5px; text-align: center;
+        }
+        code { color: #f9f295; word-break: break-all; background: #222; padding: 10px; display: block; margin: 15px 0; border: 1px dashed #d4af37; }
     </style>
 </head>
 <body>
-    <div class="card">
-        <h1>محمد (Makeen)</h1>
-        <p>فني متخصص في <b>الميكانيك، الحدادة، والبرمجة</b></p>
-        <hr>
-        <p class="skills">الخبرات التقنية: Python, Kivy, أتمتة Termux</p>
-        <p>خبير في دمج الصناعة اليدوية التقليدية مع الحلول الرقمية الحديثة.</p>
-        <a href="mailto:your-email@example.com" class="btn">إرسال رسالة للعمل</a>
+    <div class="container">
+        <header style="padding: 40px 0;">
+            <h1 class="glow">Makeen Empire 🤖</h1>
+            <p>مرحباً بك في سوق الأتمتة.. ادفع بالـ USDT واستلم بوتك فوراً.</p>
+        </header>
+
+        <div class="card">
+            <h3 class="glow">بوابة الدفع التلقائي (USDT - TRC20)</h3>
+            <p>أرسل مبلغ البوت (مثلاً 20 USDT) للعنوان التالي:</p>
+            <code>TL5Baj4KkedHF5yhunHuk946cKpeTyWHaQ</code>
+            
+            <input type="text" id="txid" placeholder="أدخل رقم العملية (TXID) هنا">
+            <br>
+            <button class="btn-gold" onclick="verifyPayment()">تحقق وافتح البوت آلياً</button>
+            <div id="status" style="margin-top: 15px;"></div>
+        </div>
+
+        <div class="card">
+            <h3 class="glow">مختبر الحلول 🛠️</h3>
+            <p>صف مشكلتك وسنجد لك البوت المناسب.</p>
+            <textarea id="problem" style="width:80%; background:#111; color:white; border:1px solid #d4af37; border-radius:5px; padding:10px;" rows="3" placeholder="اكتب هنا..."></textarea>
+            <br>
+            <button class="btn-gold" style="margin-top:10px;">إرسال الاستفسار</button>
+        </div>
+
+        <footer style="margin-top: 50px; opacity: 0.5;">&copy; 2026 محمد (Makeen)</footer>
     </div>
+
+    <script>
+        function verifyPayment() {
+            const txid = document.getElementById('txid').value;
+            const status = document.getElementById('status');
+            if(txid.length < 10) {
+                status.innerHTML = "<span style='color:red;'>يرجى إدخال رقم TXID صحيح.</span>";
+            } else {
+                status.innerHTML = "<span style='color:#d4af37;'>جاري فحص الشبكة... سيتم تفعيل البوت فور التأكد.</span>";
+            }
+        }
+    </script>
 </body>
 </html>
